@@ -1,3 +1,5 @@
+// Interman is a very stupid settings loader that injects environment variables
+// into a given structure.
 package interman
 
 import (
@@ -9,7 +11,7 @@ import (
 	"unicode"
 )
 
-// LoadEnvs is an alias to LoadEnvsWithPrefix("", baseObj)
+// LoadEnvs is an alias to `LoadEnvsWithPrefix("", baseObj)`
 func LoadEnvs(baseObj interface{}) interface{} {
 	return LoadEnvsWithPrefix("", baseObj)
 }
@@ -18,47 +20,47 @@ func LoadEnvs(baseObj interface{}) interface{} {
 // provided by you. Useful for loading settings stored in the OS environment.
 //
 // The following types are currently supported:
-// - Bool
-// - Int64
-// - []string
-// - String
+// 	- Bool
+// 	- Int64
+// 	- []string
+// 	- String
 //
-// Preflight will use the fields of the provided object to match environment
-// keys. For instance, it expects that a field named `APIKey" is available
-// as API_KEY in the environment. Assuming the `prefix" argument is filled
-// with a non-empty value `PREFLIGHT", the library will look for a env named
+// interman will use the fields of the provided object to match environment
+// keys. For instance, it expects that a field named APIKey is available
+// as API_KEY` in the environment. Assuming the prefix argument is filled
+// with a non-empty value "PREFLIGHT", the library will look for a env named
 // PREFLIGHT_API_KEY.
 //
-// Setting a `interman:"-"` tag prevents Preflight from filling the associated
+// Setting a interman:"-" tag prevents interman from filling the associated
 // field.
 //
-// A `default" tag may also be set. Its value will be set to the field in case
+// A "default" tag may also be set. Its value will be set to the field in case
 // it is absent from the environment vars set.
 //
 // For instance, take the following struct:
 //
-// type Settings struct {
-//     Username 	string
-//     SecretKey 	string	`default:"s3cr37"`
-//     AutoRestart 	bool	`default:"true"`
-//     IgnoredField string	`interman:"-"`
-// }
+// 	type Settings struct {
+// 	    Username 	string
+// 	    SecretKey 	string	`default:"s3cr37"`
+// 	    AutoRestart 	bool	`default:"true"`
+// 	    IgnoredField string	`interman:"-"`
+// 	}
 //
 // and the following environment variables:
-// - PREF_USERNAME=Rob
-// - PREF_AUTO_RESTART=false
+// 	- PREF_USERNAME=Rob
+// 	- PREF_AUTO_RESTART=false
 //
 // running the following snippet:
 //
 // 	settings := interman.LoadEnvsWithPrefix("pref", Settings{}).(Settings)
 //
 // will yield the following result:
-// {
-// 		Username: 		"Rob",
-// 		SecretKey: 		"s3cr37",
-// 		AutoRestart: 	false,
-// 		IgnoredField:	""
-// }
+// 	{
+// 			Username: 		"Rob",
+// 			SecretKey: 		"s3cr37",
+// 			AutoRestart: 	false,
+// 			IgnoredField:	""
+// 	}
 //
 func LoadEnvsWithPrefix(prefix string, baseObj interface{}) interface{} {
 	baseObjType := reflect.TypeOf(baseObj)
