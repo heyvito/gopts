@@ -1,4 +1,4 @@
-package interman
+package gopts
 
 import (
 	"os"
@@ -9,7 +9,7 @@ type T struct {
 	Username     string
 	SecretKey    string `default:"s3cr37"`
 	AutoRestart  bool   `default:"true"`
-	IgnoredField string `interman:"-"`
+	IgnoredField string `gopts:"-"`
 }
 
 type U struct {

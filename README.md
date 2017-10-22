@@ -1,36 +1,36 @@
-# Interspatial Manipulator 👽
+# Gopts 🔧
 <p align="center">
-    <a href="https://godoc.org/github.com/victorgama/interman"><img src="https://godoc.org/github.com/victorgama/interman?status.svg" alt="GoDoc"></a>
-    <a href="https://travis-ci.org/victorgama/interman"><img src="https://travis-ci.org/victorgama/interman.svg?branch=master" /></a>
-    <a href="https://codecov.io/gh/victorgama/interman"><img src="https://codecov.io/gh/victorgama/interman/branch/master/graph/badge.svg" alt="Codecov" /></a>
-    <a href="https://goreportcard.com/report/github.com/victorgama/interman"><img src="https://goreportcard.com/badge/github.com/victorgama/interman" /></a>
+    <a href="https://godoc.org/github.com/victorgama/gopts"><img src="https://godoc.org/github.com/victorgama/gopts?status.svg" alt="GoDoc"></a>
+    <a href="https://travis-ci.org/victorgama/gopts"><img src="https://travis-ci.org/victorgama/gopts.svg?branch=master" /></a>
+    <a href="https://codecov.io/gh/victorgama/gopts"><img src="https://codecov.io/gh/victorgama/gopts/branch/master/graph/badge.svg" alt="Codecov" /></a>
+    <a href="https://goreportcard.com/report/github.com/victorgama/gopts"><img src="https://goreportcard.com/badge/github.com/victorgama/gopts" /></a>
     <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" />
 </p>
 
-The Interspatial Manipulator (or `interman`) is a dummy library that loads environment
-variables into a given struct.
+**Gopts** is a simple library that loads environment variables into a given
+struct.
 
 ## Installing
 
 1. Download and install it
 ```
-$ go get -u github.com/victorgama/interman
+$ go get -u github.com/victorgama/gopts
 ```
 
 2. Import it in your code:
 ```go
-import "github.com/victorgama/interman"
+import "github.com/victorgama/gopts"
 ```
 
 ## Usage
 
-This is a really short crash-course. More information can be found on [godoc](https://godoc.org/github.com/victorgama/interman). Assuming an environment with two variables `USERNAME` and `AUTO_RESTART` set to `John` and `false`, respectively, running the following snippet of code:
+This is a really short crash-course. More information can be found on [godoc](https://godoc.org/github.com/victorgama/gopts). Assuming an environment with two variables `USERNAME` and `AUTO_RESTART` set to `John` and `false`, respectively, running the following snippet of code:
 
 ```go
 package main
 
 import (
-    "github.com/victorgama/interman"
+    "github.com/victorgama/gopts"
     "fmt"
 )
 
@@ -40,7 +40,7 @@ type Settings struct {
 }
 
 func main() {
-    settings := interman.LoadEnvs(Settings{}).(Settings)
+    settings := gopts.LoadEnvs(Settings{}).(Settings)
     fmt.Println(settings.Username)
     fmt.Println(settings.AutoRestart)
 }

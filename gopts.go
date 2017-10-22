@@ -1,6 +1,6 @@
-// Interman is a very stupid settings loader that injects environment variables
+// Gopts is a very simple settings loader that injects environment variables
 // into a given structure.
-package interman
+package gopts
 
 import (
 	"fmt"
@@ -25,13 +25,13 @@ func LoadEnvs(baseObj interface{}) interface{} {
 // 	- []string
 // 	- String
 //
-// interman will use the fields of the provided object to match environment
+// gopts will use the fields of the provided object to match environment
 // keys. For instance, it expects that a field named APIKey is available
 // as API_KEY` in the environment. Assuming the prefix argument is filled
 // with a non-empty value "PREFLIGHT", the library will look for a env named
 // PREFLIGHT_API_KEY.
 //
-// Setting a interman:"-" tag prevents interman from filling the associated
+// Setting a gopts:"-" tag prevents gopts from filling the associated
 // field.
 //
 // A "default" tag may also be set. Its value will be set to the field in case
@@ -43,7 +43,7 @@ func LoadEnvs(baseObj interface{}) interface{} {
 // 	    Username 	string
 // 	    SecretKey 	string	`default:"s3cr37"`
 // 	    AutoRestart 	bool	`default:"true"`
-// 	    IgnoredField string	`interman:"-"`
+// 	    IgnoredField string	`gopts:"-"`
 // 	}
 //
 // and the following environment variables:
@@ -52,7 +52,7 @@ func LoadEnvs(baseObj interface{}) interface{} {
 //
 // running the following snippet:
 //
-// 	settings := interman.LoadEnvsWithPrefix("pref", Settings{}).(Settings)
+// 	settings := gopts.LoadEnvsWithPrefix("pref", Settings{}).(Settings)
 //
 // will yield the following result:
 // 	{
@@ -69,7 +69,7 @@ func LoadEnvsWithPrefix(prefix string, baseObj interface{}) interface{} {
 	for i := 0; i < baseObjType.NumField(); i++ {
 		field := baseObjType.Field(i)
 		var def *string
-		if prefData, ok := field.Tag.Lookup("interman"); ok {
+		if prefData, ok := field.Tag.Lookup("gopts"); ok {
 			if prefData == "-" {
 				continue
 			}
