@@ -1,5 +1,4 @@
-// Gopts is a very simple settings loader that injects environment variables
-// into a given structure.
+// Package gopts provide facilities to load environment variables into a struct.
 package gopts
 
 import (
@@ -20,16 +19,19 @@ func LoadEnvs(baseObj interface{}) interface{} {
 // provided by you. Useful for loading settings stored in the OS environment.
 //
 // The following types are currently supported:
-// 	- Bool
-// 	- Int64
+// 	- bool
+// 	- int
+//  - int8
+//  - int16
+//  - int32
+//  - int64
 // 	- []string
-// 	- String
+// 	- string
 //
-// gopts will use the fields of the provided object to match environment
-// keys. For instance, it expects that a field named APIKey is available
-// as API_KEY` in the environment. Assuming the prefix argument is filled
-// with a non-empty value "PREFLIGHT", the library will look for a env named
-// PREFLIGHT_API_KEY.
+// gopts will use fields of the provided object to match environment keys. For
+// instance, it expects that a field named APIKey is available as `API_KEY`
+// in the environment. Assuming the prefix argument is provided with a non-empty
+// value "PREFLIGHT", the library will look for a env named PREFLIGHT_API_KEY.
 //
 // Setting a gopts:"-" tag prevents gopts from filling the associated
 // field.
@@ -40,10 +42,10 @@ func LoadEnvs(baseObj interface{}) interface{} {
 // For instance, take the following struct:
 //
 // 	type Settings struct {
-// 	    Username 	string
-// 	    SecretKey 	string	`default:"s3cr37"`
+// 	    Username 		string
+// 	    SecretKey 		string	`default:"s3cr37"`
 // 	    AutoRestart 	bool	`default:"true"`
-// 	    IgnoredField string	`gopts:"-"`
+// 	    IgnoredField 	string	`gopts:"-"`
 // 	}
 //
 // and the following environment variables:
@@ -94,7 +96,7 @@ func LoadEnvsWithPrefix(prefix string, baseObj interface{}) interface{} {
 		switch field.Type.Kind() {
 		case reflect.Bool:
 			targetField.SetBool(boolFromString(envValue))
-		case reflect.Int64, reflect.Int32, reflect.Int16, reflect.Int:
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 			if intValue, err := strconv.Atoi(envValue); err == nil {
 				targetField.SetInt(int64(intValue))
 			}
