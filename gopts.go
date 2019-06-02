@@ -94,7 +94,7 @@ func LoadEnvsWithPrefix(prefix string, baseObj interface{}) interface{} {
 		switch field.Type.Kind() {
 		case reflect.Bool:
 			targetField.SetBool(boolFromString(envValue))
-		case reflect.Int64:
+		case reflect.Int64, reflect.Int32, reflect.Int16, reflect.Int:
 			if intValue, err := strconv.Atoi(envValue); err == nil {
 				targetField.SetInt(int64(intValue))
 			}
