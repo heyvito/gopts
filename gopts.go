@@ -107,6 +107,14 @@ func LoadEnvsWithPrefix(prefix string, baseObj interface{}) interface{} {
 				break
 			}
 			fallthrough
+		case reflect.Float32:
+			if val, err := strconv.ParseFloat(envValue, 32); err == nil {
+				targetField.SetFloat(val)
+			}
+		case reflect.Float64:
+			if val, err := strconv.ParseFloat(envValue, 64); err == nil {
+				targetField.SetFloat(val)
+			}
 		default:
 			targetField.SetString(envValue)
 		}
