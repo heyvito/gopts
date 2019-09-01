@@ -104,7 +104,12 @@ func LoadEnvsWithPrefix(prefix string, baseObj interface{}) interface{} {
 			if reflect.TypeOf(field.Type.Elem()).Kind() == reflect.Ptr {
 				// Assuming as String, this will have to change anytime soon
 				// we support other slice types
-				values := strings.Split(envValue, ",")
+				var values []string
+				if len(envValue) == 0 {
+					values = []string{}
+				} else {
+					values = strings.Split(envValue, ",")
+				}
 				targetField.Set(reflect.ValueOf(values))
 				break
 			}

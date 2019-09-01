@@ -105,3 +105,15 @@ func TestFieldTypes(t *testing.T) {
 		t.Error("Failed reading string field")
 	}
 }
+
+func TestEmptySlices(t *testing.T) {
+	os.Setenv("BOOL_FIELD", "")
+	os.Setenv("INT_FIELD", "")
+	os.Setenv("SLICE_FIELD", "")
+	os.Setenv("STRING_FIELD", "")
+	result := LoadEnvs(U{}).(U)
+
+	if len(result.SliceField) != 0 {
+		t.Errorf("Expected SliceField to be empty, instead got len %d", len(result.SliceField))
+	}
+}

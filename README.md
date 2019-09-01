@@ -24,7 +24,7 @@ import "github.com/victorgama/gopts"
 
 ## Usage
 
-This is a really short crash-course. More information can be found on [godoc](https://godoc.org/github.com/victorgama/gopts). Assuming an environment with two variables `USERNAME` and `AUTO_RESTART` set to `John` and `false`, respectively, running the following snippet of code:
+This is a really short crash-course. More information can be found on [godoc](https://godoc.org/github.com/victorgama/gopts). Assuming an environment with two variables `USERNAME` and `AUTO_RESTART` set to `Rômulo` and `false`, respectively, running the following snippet of code:
 
 ```go
 package main
@@ -49,7 +49,7 @@ func main() {
 Will yield the following output:
 
 ```
-John
+Rômulo
 false
 ```
 
@@ -58,7 +58,7 @@ false
 ```
 MIT License
 
-Copyright (c) 2017 Victor Gama
+Copyright (c) 2017-2019 Victor Gama
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
